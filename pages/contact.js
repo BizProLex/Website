@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import Section from '@/components/Section';
 
+// Default to FormSubmit on static hosting (GH Pages). Set NEXT_PUBLIC_USE_FORMSUBMIT=false to use API.
+const USE_FORMSUBMIT = process.env.NEXT_PUBLIC_USE_FORMSUBMIT !== 'false';
+const FORMSUBMIT_EMAIL = process.env.NEXT_PUBLIC_FORMSUBMIT_EMAIL || 'sujata.duge@bizprolex.com';
+
 export default function Contact() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e) {
+    if (USE_FORMSUBMIT) return; // native post to FormSubmit on GH Pages
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
@@ -38,9 +43,22 @@ export default function Contact() {
             <p><strong>LinkedIn:</strong> <a className="text-black underline" href="https://www.linkedin.com/in/sujataduge/" target="_blank" rel="noreferrer">linkedin.com/in/sujataduge</a></p>
           </div>
 
-          <form onSubmit={onSubmit} className="grid grid-cols-1 gap-4">
+          <form
+            onSubmit={onSubmit}
+            className="grid grid-cols-1 gap-4"
+            action={USE_FORMSUBMIT ? `https://formsubmit.co/${FORMSUBMIT_EMAIL}` : undefined}
+            method={USE_FORMSUBMIT ? 'POST' : undefined}
+          >
             {/* Honeypot */}
             <input type="text" name="company" className="hidden" tabIndex="-1" autoComplete="off" aria-hidden="true" />
+            {USE_FORMSUBMIT && (
+              <>
+                <input type="hidden" name="_subject" value="New contact from bizprolex.com" />
+                <input type="hidden" name="_cc" value="kerem@bizprolex.com" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="/thanks/" />
+              </>
+            )}
             <div>
               <label className="block text-sm font-medium text-black mb-1">Name</label>
               <input name="name" required className="w-full rounded-md border border-black/20 bg-white px-3 py-2 focus-visible:ring-black" />
@@ -57,7 +75,7 @@ export default function Contact() {
               <button disabled={loading} className="rounded-md bg-black px-5 py-2.5 text-white hover:bg-black/90 disabled:opacity-60">
                 {loading ? 'Sending…' : 'Send Message'}
               </button>
-              {status && (
+              {!USE_FORMSUBMIT && status && (
                 <p className={`text-sm ${status.ok ? 'text-green-700' : 'text-red-700'}`}>{status.message}</p>
               )}
             </div>
