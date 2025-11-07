@@ -18,11 +18,11 @@ export default function Services() {
     <>
       <Section title="Legal Consultancy Services – Our Offerings" className="py-8 md:py-10" titleClassName="text-3xl md:text-4xl">
         <div className="grid grid-cols-1 gap-6 items-start">
-          <div className="space-y-4 text-black/90 leading-relaxed max-w-3xl">
+          <div className="space-y-6 text-black/90 leading-relaxed max-w-3xl">
             <p>
               At BizProLex Legal, we provide tailored, precise, and cost effective legal solutions to corporates, SMEs, startups, and entrepreneurs operating across diverse sectors.
             </p>
-            <div className="mt-1.5 flex flex-wrap gap-4 md:gap-5">
+            <div className="flex flex-wrap gap-4 md:gap-5">
               {sectors.map((s) => (
                 <span
                   key={s}
