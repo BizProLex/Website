@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global resets and typography */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-black font-inter antialiased;
+}
+
+/* Selection */
+::selection {
+  background: #00000022;
+}
+
+/* Reusable utility for section widths */
+.container-px {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+/* Hide default focus outline but keep accessibility */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  @apply ring-2 ring-gold ring-offset-2 ring-offset-white;
+}

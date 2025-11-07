@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Logs and system files
+.DS_Store
+npm-debug.log*
+.next-dev.log
+.next-dev.pid
+
+# Env and tooling
+.env*
+.vercel/
+.vscode/
+coverage/
+
+# Build output for GitHub Pages is in docs/
+!docs/
