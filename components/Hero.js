@@ -4,7 +4,7 @@ export default function Hero({ onLearnMore }) {
   return (
     <section
       className="relative h-[calc(100vh-4rem)] w-full overflow-hidden bg-center bg-cover"
-      style={{ backgroundImage: 'url(/Landing-Page-BG.jpg)' }}
+      style={{ backgroundImage: 'url(/LANDING-PAGE-BG.jpg)' }}
       id="home"
     >
       {/* Overlay gradient */}
