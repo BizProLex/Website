@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
-  { name: 'Our Team', href: '/team' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Home', href: './' },
+  { name: 'About', href: './about/' },
+  { name: 'Services', href: './services/' },
+  { name: 'Our Team', href: './team/' },
+  { name: 'Contact', href: './contact/' },
 ];
 
 export default function Navbar() {
