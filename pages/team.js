@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import Section from '@/components/Section';
 import Link from 'next/link';
 
@@ -8,13 +7,7 @@ export default function Team() {
       <Section title="Our Team" className="pt-6 md:pt-8 pb-6" titleClassName="text-4xl md:text-5xl">
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {/* Sujata */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5 }}
-            className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col"
-          >
+          <div className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col animate-fade-in">
             <div className="flex items-start gap-4">
               <div className="h-20 w-20 shrink-0 rounded-lg bg-black border border-black/20 flex items-center justify-center">
                 <span className="text-white font-playfair text-lg">SD</span>
@@ -26,23 +19,17 @@ export default function Team() {
                   <li>15+ years across capital markets, project finance, and corporate advisory</li>
                   <li>Advises on commercial/financing negotiations and employment matters</li>
                   <li>UAE sectors: consulting, retail, logistics, technology, real estate, entertainment</li>
-                  <li>LL.M. International Financial Law, King’s College London</li>
+                  <li>LL.M. International Financial Law, King's College London</li>
                 </ul>
                 <Link href="/team/sujata" className="mt-5 inline-flex items-center text-black underline decoration-gold underline-offset-4 hover:text-gold font-medium">
                   Read full bio →
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Kerem */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col"
-          >
+          <div className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col animate-fade-in-delay">
             <div className="flex items-start gap-4">
               <div className="h-20 w-20 shrink-0 rounded-lg bg-black border border-black/20 flex items-center justify-center">
                 <span className="text-white font-playfair text-lg">KE</span>
@@ -60,7 +47,7 @@ export default function Team() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </Section>
     </>
