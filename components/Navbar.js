@@ -30,9 +30,9 @@ export default function Navbar() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 bg-black shadow-lg border-b border-gold/30`}>
       <nav className="container-px mx-auto flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center">
+        <Link href="./" className="flex items-center">
           <img 
-            src="/LOGO.png" 
+            src="./LOGO.png" 
             alt="BizProLex Legal" 
             className="h-8 w-auto"
           />
