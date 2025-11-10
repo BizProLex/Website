@@ -7,7 +7,9 @@
     "dev:8000": "next dev -p 8000",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "preview": "DIR=docs PORT=8000 node scripts/serve.js",
+    "preview:out": "DIR=out PORT=8000 node scripts/serve.js"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
