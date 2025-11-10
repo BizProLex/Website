@@ -1,11 +1,8 @@
-name: Build and Deploy to gh-pages
+name: Build and Deploy to docs
 
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-      - 'docs/**'
-      - '.github/workflows/**'
 
 jobs:
   deploy:
@@ -41,9 +38,17 @@ jobs:
           find out -name "*.js" -exec sed -i 's|/_next/|./_next/|g' {} \;
           find out -name "*.css" -exec sed -i 's|/_next/|./_next/|g' {} \;
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          force_orphan: true
+      - name: Copy build output to docs
+        run: |
+          # Remove existing docs content
+          rm -rf docs/*
+          # Copy new build to docs
+          cp -r out/* docs/
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add docs/
+          git commit -m "Deploy website to docs" || echo "No changes to commit"
+          git push
