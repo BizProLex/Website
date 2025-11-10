@@ -1,4 +1,4 @@
-name: Build and Export to docs
+name: Build and Deploy to gh-pages
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - '.github/workflows/**'
 
 jobs:
-  build-export:
+  deploy:
     if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     permissions:
@@ -24,27 +24,19 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build static export
         run: npm run build
 
-      - name: Prepare docs folder
+      - name: Copy CNAME if present
         run: |
-          rm -rf docs
-          cp -R out docs
-          touch docs/.nojekyll
-          if [ -f CNAME ]; then cp CNAME docs/CNAME; fi
+          if [ -f CNAME ]; then cp CNAME out/CNAME; fi
+          touch out/.nojekyll
 
-      - name: Commit and push docs
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "ci: export static site to docs [skip ci]"
-            git push
-          fi
-
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          force_orphan: true
