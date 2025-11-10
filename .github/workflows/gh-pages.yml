@@ -31,13 +31,6 @@ jobs:
           if [ -f CNAME ]; then cp CNAME out/CNAME; fi
           touch out/.nojekyll
 
-      - name: Ensure proper base path for GitHub Pages
-        run: |
-          # Fix any absolute paths that might be causing issues
-          find out -name "*.html" -exec sed -i 's|/_next/|./_next/|g' {} \;
-          find out -name "*.js" -exec sed -i 's|/_next/|./_next/|g' {} \;
-          find out -name "*.css" -exec sed -i 's|/_next/|./_next/|g' {} \;
-
       - name: Copy build output to docs
         run: |
           # Remove existing docs content
