@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-const rootDir = path.resolve(process.env.DIR || 'docs');
+const rootDir = path.resolve(process.env.DIR || 'out');
 const port = Number(process.env.PORT || 8000);
 
 // MIME types mapping
