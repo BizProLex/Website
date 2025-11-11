@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ROUTES } from '@/config/constants';
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about/' },
-  { name: 'Services', href: '/services/' },
-  { name: 'Our Team', href: '/team/' },
-  { name: 'Contact', href: '/contact/' },
+  { name: 'Home', href: ROUTES.HOME },
+  { name: 'About', href: ROUTES.ABOUT },
+  { name: 'Services', href: ROUTES.SERVICES },
+  { name: 'Our Team', href: ROUTES.TEAM },
+  { name: 'Contact', href: ROUTES.CONTACT },
 ];
 
 export default function Navbar() {
@@ -27,54 +28,26 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', onEsc);
   }, [open]);
 
-  // Get the appropriate href for each navigation item based on current path
-  const getNavHref = (itemHref) => {
+  // Calculate relative path prefix based on current route depth
+  const getRelativePrefix = () => {
     const path = router.pathname;
-    
-    // If we're on a team member page (/team/kerem/ or /team/sujata/)
-    if (path === '/team/kerem' || path === '/team/sujata' || path === '/team/kerem/' || path === '/team/sujata/') {
-      // "Our Team" from a team member page should go to the main team page (..)
-      if (itemHref === '/team/') return '../';
-      // Home should go to root (../../)
-      if (itemHref === '/') return '../../';
-      // About, Services, Contact should go up 2 levels (../../)
-      return '../../' + itemHref.slice(1);
-    }
-    
-    // If we're on the main team page (/team/)
-    if (path === '/team' || path === '/team/') {
-      // "Our Team" should stay on same page
-      if (itemHref === '/team/') return './team/';
-      // Home should go to root
-      if (itemHref === '/') return '../';
-      // Other pages go up one level
-      return '../' + itemHref.slice(1);
-    }
-    
-    // Default: use current directory
-    return '.' + itemHref;
-  };
-
-  // Get the appropriate path for logo and home link
-  const getBasePath = () => {
-    const path = router.pathname;
-    if (path === '/team/kerem' || path === '/team/sujata' || path === '/team/kerem/' || path === '/team/sujata/') {
-      return '../..';
+    if (path.startsWith('/team/') && path !== '/team' && path !== '/team/') {
+      return '../..'; // Team member pages are 2 levels deep
     }
     if (path === '/team' || path === '/team/') {
-      return '..';
+      return '..'; // Team index is 1 level deep
     }
-    return '.';
+    return '.'; // Root pages
   };
 
-  const basePath = getBasePath();
+  const relativePrefix = getRelativePrefix();
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 bg-black shadow-lg border-b border-gold/30`}>
       <nav className="container-px mx-auto flex h-16 items-center justify-between">
-        <Link href={basePath + '/'} className="flex items-center">
+        <Link href={relativePrefix + '/'} className="flex items-center">
           <img 
-            src={basePath + '/LOGO.png'} 
+            src={relativePrefix + '/LOGO.png'} 
             alt="BizProLex Legal" 
             className="h-8 w-auto"
           />
@@ -85,7 +58,7 @@ export default function Navbar() {
           {navItems.map((item) => (
             <li key={item.name}>
               <Link
-                href={getNavHref(item.href)}
+                href={relativePrefix + item.href}
                 className="text-white/90 hover:text-gold transition-colors font-medium"
               >
                 {item.name}
@@ -117,7 +90,7 @@ export default function Navbar() {
               {navItems.map((item) => (
                 <li key={item.name}>
                   <Link
-                    href={getNavHref(item.href)}
+                    href={relativePrefix + item.href}
                     onClick={() => setOpen(false)}
                     className="block rounded-md px-3 py-2 text-white/90 hover:text-gold hover:bg-white/5"
                   >

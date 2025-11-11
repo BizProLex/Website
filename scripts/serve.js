@@ -9,7 +9,8 @@ const url = require('url');
 const rootDir = path.resolve(process.env.DIR || 'docs');
 const port = Number(process.env.PORT || 8000);
 
-const MIME = {
+// MIME types mapping
+const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
@@ -23,51 +24,100 @@ const MIME = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
-  '.eot': 'application/vnd.ms-fontobject',
-  '.txt': 'text/plain; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8'
 };
 
-const server = http.createServer((req, res) => {
-  const parsed = url.parse(req.url || '/');
-  let pathname = decodeURIComponent(parsed.pathname || '/');
+// Security: Prevent directory traversal attacks
+function isPathSafe(pathname) {
+  return !pathname.includes('..') && !pathname.includes('\0');
+}
 
-  // Prevent path traversal
-  if (pathname.includes('..')) {
-    res.writeHead(400);
-    return res.end('Bad request');
+// Get file path and handle directory indexing
+function getFilePath(requestedPath) {
+  let filePath = path.join(rootDir, requestedPath);
+  
+  // Security check
+  if (!isPathSafe(requestedPath)) {
+    return { error: 'Bad request', code: 400 };
   }
 
-  // Map directory requests to index.html
-  let filePath = path.join(rootDir, pathname);
   try {
-    const stat = fs.existsSync(filePath) && fs.statSync(filePath);
-    if (stat && stat.isDirectory()) {
-      if (!pathname.endsWith('/')) {
-        res.writeHead(301, { Location: pathname + '/' });
-        return res.end();
+    const stats = fs.existsSync(filePath) && fs.statSync(filePath);
+    
+    // Handle directories
+    if (stats && stats.isDirectory()) {
+      // Redirect to trailing slash if missing
+      if (!requestedPath.endsWith('/')) {
+        return { redirect: requestedPath + '/' };
       }
-      filePath = path.join(filePath, 'index.html');
+      
+      // Try index.html first
+      const indexPath = path.join(filePath, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        return { filePath: indexPath };
+      }
     }
-  } catch (_) {}
+    
+    // Handle files
+    if (stats && stats.isFile()) {
+      return { filePath };
+    }
+    
+    // Default fallback for root or missing extensions
+    if (!path.extname(requestedPath)) {
+      const defaultIndex = path.join(rootDir, 'index.html');
+      if (fs.existsSync(defaultIndex)) {
+        return { filePath: defaultIndex };
+      }
+    }
+    
+    return { error: 'Not Found', code: 404 };
+  } catch (error) {
+    return { error: 'Server Error', code: 500 };
+  }
+}
 
-  // Default to index.html at root
-  if (!path.extname(filePath)) {
-    filePath = path.join(rootDir, 'index.html');
+// Create HTTP server
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url || '/', true);
+  let pathname = decodeURIComponent(parsedUrl.pathname || '/');
+
+  // Get file path
+  const result = getFilePath(pathname);
+  
+  // Handle redirects
+  if (result.redirect) {
+    res.writeHead(301, { Location: result.redirect });
+    return res.end();
+  }
+  
+  // Handle errors
+  if (result.error) {
+    res.writeHead(result.code, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end(result.error);
   }
 
-  fs.readFile(filePath, (err, data) => {
+  // Read and serve file
+  fs.readFile(result.filePath, (err, data) => {
     if (err) {
-      res.writeHead(404);
-      return res.end('Not Found');
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end('File not found');
     }
-    const ext = path.extname(filePath).toLowerCase();
-    const type = MIME[ext] || 'application/octet-stream';
-    res.writeHead(200, { 'Content-Type': type, 'Cache-Control': 'no-cache' });
+
+    // Set content type
+    const ext = path.extname(result.filePath).toLowerCase();
+    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    
+    res.writeHead(200, { 
+      'Content-Type': contentType,
+      'Cache-Control': 'no-cache' // Disable caching for development
+    });
     res.end(data);
   });
 });
 
+// Start server
 server.listen(port, () => {
-  console.log(`Serving ${rootDir} at http://localhost:${port}`);
+  console.log(`🚀 Serving ${rootDir} at http://localhost:${port}`);
+  console.log(`📁 Press Ctrl+C to stop`);
 });
-

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { ANIMATION_CONFIG } from '@/config/constants';
 
 export default function Hero({ onLearnMore }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -14,6 +15,17 @@ export default function Hero({ onLearnMore }) {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Memoize particles to prevent recreation on every render
+  const particles = useMemo(() => {
+    return [...Array(ANIMATION_CONFIG.particleCount)].map((_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: ANIMATION_CONFIG.particleMinDuration + Math.random() * (ANIMATION_CONFIG.particleMaxDuration - ANIMATION_CONFIG.particleMinDuration),
+      delay: Math.random() * ANIMATION_CONFIG.particleMaxDelay,
+    }));
   }, []);
 
   const containerVariants = {
@@ -64,13 +76,13 @@ export default function Hero({ onLearnMore }) {
 
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((particle) => (
           <motion.div
-            key={i}
+            key={particle.id}
             className="absolute w-1 h-1 bg-gold/30 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
             animate={{
               y: [0, -30, 0],
@@ -78,9 +90,9 @@ export default function Hero({ onLearnMore }) {
               scale: [0, 1, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: particle.delay,
               ease: 'easeInOut',
             }}
           />

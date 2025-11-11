@@ -2,12 +2,10 @@ import '@/styles/globals.css';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
-const WHATSAPP_NUMBER = '+9710567449815';
-const WHATSAPP_MESSAGE = 'Hello, I would like to inquire about your legal services.';
+import { CONTACT_INFO } from '@/config/constants';
 
 export default function App({ Component, pageProps }) {
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  const whatsappUrl = `https://wa.me/${CONTACT_INFO.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`;
 
   return (
     <>
