@@ -40,8 +40,17 @@ function fixPaths(content, filePath) {
 
     // Fix Our Team link - specifically target the Our Team text
     content = content.replace(/<a[^>]*>.*?Our Team.*?<\/a>/g, (match) => {
-      if (match.includes('href="/"')) {
+      if (match.includes('href="../team/"')) {
+        return match; // Already correct
+      }
+      if (match.includes('href="../../"')) {
+        return match.replace(/href="../../"/g, 'href="../team/"');
+      }
+      if (match.includes('href="\/"')) {
         return match.replace(/href="\/"/g, 'href="../team/"');
+      }
+      if (match.includes("href='../../'")) {
+        return match.replace(/href='../../'/g, "href='../team/'");
       }
       if (match.includes("href='/'")) {
         return match.replace(/href='\/'/g, "href='../team/'");
@@ -51,10 +60,22 @@ function fixPaths(content, filePath) {
 
     // Fix Home link - specifically target the Home text
     content = content.replace(/<a[^>]*>.*?Home.*?<\/a>/g, (match) => {
-      if (match.includes('href="/"')) {
+      if (match.includes('href="../../"')) {
+        return match; // Already correct
+      }
+      if (match.includes('href="../team/"')) {
+        return match.replace(/href="\/team\/"/g, 'href="../../"');
+      }
+      if (match.includes('href="\/"')) {
         return match.replace(/href="\/"/g, 'href="../../"');
       }
-      if (match.includes("href='/'")) {
+      if (match.includes("href='../../'")) {
+        return match; // Already correct
+      }
+      if (match.includes("href='\/team\/'")) {
+        return match.replace(/href='\/team\/'/g, "href='../../'");
+      }
+      if (match.includes("href='\/'")) {
         return match.replace(/href='\/'/g, "href='../../'");
       }
       return match;
