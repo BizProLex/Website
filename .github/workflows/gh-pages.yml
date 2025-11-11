@@ -26,22 +26,16 @@ jobs:
       - name: Build static export
         run: npm run build
 
-      - name: Copy CNAME if present
+      - name: Setup GitHub Pages
         run: |
-          if [ -f CNAME ]; then cp CNAME out/CNAME; fi
-          touch out/.nojekyll
-
-      - name: Copy build output to docs
-        run: |
-          # Remove existing docs content
-          rm -rf docs/*
-          # Copy new build to docs
-          cp -r out/* docs/
+          # The build already outputs to docs/ directory via distDir config
+          # Just ensure .nojekyll file exists for GitHub Pages
+          touch docs/.nojekyll
 
       - name: Commit and push changes
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add docs/
-          git commit -m "Deploy website to docs" || echo "No changes to commit"
+          git commit -m "Deploy website to GitHub Pages" || echo "No changes to commit"
           git push
