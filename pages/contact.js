@@ -27,7 +27,7 @@ export default function Contact() {
             <input type="hidden" name="_subject" value="New contact from bizprolex.com" />
             <input type="hidden" name="_cc" value="kerem@bizprolex.com" />
             <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="/thanks/" />
+            <input type="hidden" name="_next" value="./thanks/" />
             <div>
               <label className="block text-sm font-medium text-black mb-1">Name</label>
               <input name="name" required className="w-full rounded-md border border-black/20 bg-white px-3 py-2 focus-visible:ring-black" />
