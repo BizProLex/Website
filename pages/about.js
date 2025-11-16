@@ -5,7 +5,7 @@ export default function About() {
     <>
       <Section title="About Us">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          <div className="space-y-6 text-black/90 leading-relaxed">
+          <div className="space-y-6 text-black/90 leading-relaxed text-justify">
             <p>
               BizProLex Legal is a forward-thinking legal consultancy based in the UAE, dedicated to empowering corporates, SMEs, startups and individuals with practical and effective business legal solutions. Our mission is to simplify commercial documentation and compliance while redefining how businesses approach legal challenges enabling operations that are both efficient and compliant.
             </p>

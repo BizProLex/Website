@@ -55,3 +55,8 @@ body {
 .animate-slide-down {
   animation: slideDown 0.25s ease-out;
 }
+
+/* Utility: justify paragraph text */
+.text-justify {
+  text-align: justify;
+}

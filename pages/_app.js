@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="flex-1 pt-16">{/* offset for fixed navbar */}
+        <main className="flex-1 pt-16 text-justify">{/* offset for fixed navbar */}
           <Component {...pageProps} />
         </main>
         <Footer />

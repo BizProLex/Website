@@ -1,4 +1,5 @@
 import Section from '@/components/Section';
+import Image from 'next/image';
 
 const sectors = [
   'Retail',
@@ -15,10 +16,10 @@ const sectors = [
 
 export default function Services() {
   return (
-    <>
+    <div className="text-justify">
       <Section title="Legal Consultancy Services – Our Offerings" className="py-8 md:py-10" titleClassName="text-3xl md:text-4xl">
-        <div className="grid grid-cols-1 gap-6 items-start">
-          <div className="space-y-6 text-black/90 leading-relaxed max-w-3xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div className="space-y-6 text-black/90 leading-relaxed">
             <p>
               At BizProLex Legal, we provide tailored, precise, and cost effective legal solutions to corporates, SMEs, startups, and entrepreneurs operating across diverse sectors.
             </p>
@@ -40,8 +41,20 @@ export default function Services() {
             </p>
             <p>Client recommendations and references are available upon request.</p>
           </div>
+
+          <div className="flex items-center justify-center -mt-4 ml-8">
+            <div className="relative w-full h-96">
+              <Image
+                src="/fountain-pen-resting-signed-document-wax-seal-representing-contract-legal-agreement-409051338.webp"
+                alt="Legal contract with fountain pen and wax seal"
+                width={600}
+                height={400}
+                className="w-full h-auto object-cover rounded-lg border border-black/20"
+              />
+            </div>
+          </div>
         </div>
       </Section>
-    </>
+    </div>
   );
 }

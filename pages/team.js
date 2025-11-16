@@ -1,5 +1,5 @@
 import Section from '@/components/Section';
-import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Team() {
   return (
@@ -9,21 +9,30 @@ export default function Team() {
           {/* Sujata */}
           <div className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col animate-fade-in">
             <div className="flex items-start gap-4">
-              <div className="h-20 w-20 shrink-0 rounded-lg bg-black border border-black/20 flex items-center justify-center">
-                <span className="text-white font-playfair text-lg">SD</span>
+              <div className="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden bg-black border border-black/20">
+                <Image
+                  src="/Sujata.jpeg"
+                  alt="Sujata Duge"
+                  width={80}
+                  height={80}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="flex-1 min-h-0 pr-1">
+              <div className="flex-1 min-w-0">
                 <h3 className="font-playfair text-2xl text-black">Sujata  Duge, LL.M.</h3>
                 <p className="text-black/80">Managing Director</p>
-                <ul className="mt-4 space-y-2 text-black/90 text-sm md:text-base list-disc pl-5">
-                  <li>15+ years across capital markets, project finance, and corporate advisory</li>
-                  <li>Advises on commercial/financing negotiations and employment matters</li>
-                  <li>UAE sectors: consulting, retail, logistics, technology, real estate, entertainment</li>
-                  <li>LL.M. International Financial Law, King's College London</li>
-                </ul>
-                <Link href="/team/sujata" className="mt-5 inline-flex items-center text-black underline decoration-gold underline-offset-4 hover:text-gold font-medium">
-                  Read full bio →
-                </Link>
+
+                <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify">
+                  <p>
+                    Sujata Duge works closely with clients advising on the negotiation of key commercial and financing agreements, business operations, and employment related matters. With over 15 years of experience in capital markets, project finance and corporate advisory, she brings commercial insight and international legal training to clients navigating complex regulatory and transactional landscapes in the UAE and beyond.
+                  </p>
+                  <p>
+                    Her UAE practice encompasses advising on, drafting and negotiating contracts across consulting, mall management, logistics, retail, distribution, technology, real estate, perfumery and entertainment sectors. She has also worked with prominent financial institutions and boutique law firms handling capital market transactions such as private placements, IPOs and rights issues. Her expertise encompasses equity and debt transactions, project finance, corporate lending and the drafting and negotiation of financing and commercial documentation, as well as corporate restructuring, mergers & acquisitions, and cross-border advisory.
+                  </p>
+                  <p>
+                    Sujata holds a Master's degree in International Financial Law from King's College London, a specialist programme focusing on major global financial market transactions and their regulation. She has also completed the DIFC Laws Certificate Programme 2025, enhancing her ability to advise on sophisticated financing structures, complex investment strategies and multi-jurisdictional transactions.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -31,20 +40,24 @@ export default function Team() {
           {/* Kerem */}
           <div className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col animate-fade-in-delay">
             <div className="flex items-start gap-4">
-              <div className="h-20 w-20 shrink-0 rounded-lg bg-black border border-black/20 flex items-center justify-center">
-                <span className="text-white font-playfair text-lg">KE</span>
+              <div className="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden bg-black border border-black/20">
+                <Image
+                  src="/Kerem.jpeg"
+                  alt="Kerem Selahattin Ergün"
+                  width={80}
+                  height={80}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="flex-1 min-h-0 pr-1">
+              <div className="flex-1 min-w-0">
                 <h3 className="font-playfair text-2xl text-black">Kerem Selahattin Ergün, LL.M</h3>
                 <p className="text-black/80">Of Counsel</p>
-                <ul className="mt-4 space-y-2 text-black/90 text-sm md:text-base list-disc pl-5">
-                  <li>15+ years across litigation, M&A, employment, IP, entertainment</li>
-                  <li>Strategic, results-driven counsel across transactional and litigation</li>
-                  <li>Focus on the evolving esports law landscape</li>
-                </ul>
-                <Link href="/team/kerem" className="mt-5 inline-flex items-center text-black underline decoration-gold underline-offset-4 hover:text-gold font-medium">
-                  Read full bio →
-                </Link>
+
+                <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify">
+                  <p>
+                    Kerem is a highly experienced lawyer with over 15 years in the legal profession, specializing in a diverse range of practice areas, including commercial litigation, mergers and acquisitions, employment law, intellectual property law, entertainment law, and the rapidly evolving field of esports law. His extensive background in these areas allows him to provide strategic, results-driven legal advice to clients across various industries. Kerem's commitment to excellence and deep understanding of complex legal frameworks ensure that his clients receive the highest level of representation and support in navigating both transactional and litigation matters.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

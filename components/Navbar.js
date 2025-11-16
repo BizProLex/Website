@@ -34,8 +34,10 @@ export default function Navbar() {
     if (path.startsWith('/team/') && path !== '/team' && path !== '/team/') {
       return '../..'; // Team member pages are 2 levels deep
     }
-    if (path === '/team' || path === '/team/') {
-      return '..'; // Team index is 1 level deep
+    if (path === '/team' || path === '/team/' || 
+        path.startsWith('/about') || path.startsWith('/services') || 
+        path.startsWith('/contact') || path.startsWith('/thanks')) {
+      return '..'; // Pages in subdirectories need one level up
     }
     return '.'; // Root pages
   };
@@ -45,15 +47,7 @@ export default function Navbar() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 bg-black shadow-lg border-b border-gold/30`}>
       <nav className="container-px mx-auto flex h-16 items-center justify-between">
-        <Link href={relativePrefix + '/'} className="flex items-center">
-          <img 
-            src={relativePrefix + '/LOGO.png'} 
-            alt="BizProLex Legal" 
-            className="h-8 w-auto"
-          />
-        </Link>
-
-        {/* Desktop nav */}
+        {/* Desktop nav - now on the left */}
         <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <li key={item.name}>
@@ -66,6 +60,15 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
+        {/* Logo now on the right */}
+        <Link href={relativePrefix + '/'} className="flex items-center">
+          <img 
+            src={relativePrefix + '/LOGO.png'} 
+            alt="BizProLex Legal" 
+            className="h-8 w-auto"
+          />
+        </Link>
 
         {/* Mobile menu button */}
         <button
@@ -86,19 +89,31 @@ export default function Navbar() {
         {/* Mobile drawer */}
         {open && (
           <div className="md:hidden bg-black border-t border-white/10 animate-slide-down">
-            <ul className="container-px py-4 space-y-2">
-              {navItems.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={relativePrefix + item.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-md px-3 py-2 text-white/90 hover:text-gold hover:bg-white/5"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="container-px py-4">
+              {/* Logo at top of mobile menu */}
+              <div className="flex justify-center mb-4">
+                <Link href={relativePrefix + '/'} className="flex items-center" onClick={() => setOpen(false)}>
+                  <img
+                    src={relativePrefix + '/LOGO.png'}
+                    alt="BizProLex Legal"
+                    className="h-8 w-auto"
+                  />
+                </Link>
+              </div>
+              <ul className="space-y-2">
+                {navItems.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={relativePrefix + item.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-md px-3 py-2 text-white/90 hover:text-gold hover:bg-white/5"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
     </header>
