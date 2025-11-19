@@ -19,5 +19,6 @@ export const ROUTES = {
   SERVICES: '/services/',
   TEAM: '/team/',
   TEAM_MEMBER: '/team/',
+  CONTACT: '/contact/',
   THANKS: '/thanks/'
 };

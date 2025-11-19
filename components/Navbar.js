@@ -8,6 +8,7 @@ const navItems = [
   { name: 'About', href: ROUTES.ABOUT },
   { name: 'Services', href: ROUTES.SERVICES },
   { name: 'Our Team', href: ROUTES.TEAM },
+  { name: 'Contact', href: ROUTES.CONTACT },
 ];
 
 export default function Navbar() {
