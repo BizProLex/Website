@@ -8,21 +8,21 @@ export default function Team() {
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {/* Sujata */}
           <div className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col animate-fade-in">
-            <div className="flex items-start gap-4">
-              <div className="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden bg-black border border-black/20">
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="h-32 w-32 md:h-48 md:w-48 flex-shrink-0 rounded-lg overflow-hidden bg-black border border-black/20">
                 <Image
                   src="/Sujata.jpeg"
                   alt="Sujata Duge"
-                  width={80}
-                  height={80}
+                  width={192}
+                  height={192}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-playfair text-2xl text-black">Sujata  Duge, LL.M.</h3>
-                <p className="text-black/80">Managing Director</p>
+                <h3 className="font-playfair text-xl text-black">Sujata  Duge, LL.M.</h3>
+                <p className="text-black/80 text-sm">Managing Director</p>
 
-                <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify">
+                <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify text-sm">
                   <p>
                     Sujata Duge advises clients on key commercial and financing agreements, business operations, and employment matters. With over 15 years of experience in capital markets, project finance, and corporate advisory, she brings commercial insight and international legal training to support businesses navigating complex regulatory and transactional landscapes in the UAE and beyond.
                   </p>
@@ -39,21 +39,21 @@ export default function Team() {
 
           {/* Kerem */}
           <div className="rounded-xl border border-black/10 hover:border-gold/60 bg-white p-6 transition-colors flex flex-col animate-fade-in-delay">
-            <div className="flex items-start gap-4">
-              <div className="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden bg-black border border-black/20">
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="h-32 w-32 md:h-48 md:w-48 flex-shrink-0 rounded-lg overflow-hidden bg-black border border-black/20">
                 <Image
                   src="/Kerem.jpeg"
                   alt="Kerem Selahattin Ergün"
-                  width={80}
-                  height={80}
+                  width={192}
+                  height={192}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-playfair text-2xl text-black">Kerem Selahattin Ergün, LL.M</h3>
-                <p className="text-black/80">Of Counsel</p>
+                <h3 className="font-playfair text-xl text-black">Kerem Selahattin Ergün, LL.M</h3>
+                <p className="text-black/80 text-sm">Of Counsel</p>
 
-                <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify">
+                <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify text-sm">
                   <p>
                     Kerem is a highly experienced lawyer with over 15 years in the legal profession, specializing in a diverse range of practice areas, including commercial litigation, mergers and acquisitions, employment law, intellectual property law, entertainment law, and the rapidly evolving field of esports law. His extensive background in these areas allows him to provide strategic, results-driven legal advice to clients across various industries. Kerem's commitment to excellence and deep understanding of complex legal frameworks ensure that his clients receive the highest level of representation and support in navigating both transactional and litigation matters.
                   </p>
