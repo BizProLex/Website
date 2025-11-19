@@ -1,4 +1,5 @@
 import Section from '@/components/Section';
+import Image from 'next/image';
 
 export default function About() {
   return (
@@ -22,10 +23,13 @@ export default function About() {
               At BizProLex Legal, we value collaboration and believe in building partnerships that foster mutual success. Our commitment lies in delivering timely, cost effective and business focused legal solutions, guided by integrity, responsiveness and a deep understanding of our clients’ commercial objectives.
             </p>
           </div>
-          <div className="relative w-full h-96">
-            <div className="absolute inset-0 rounded-lg border border-black/10 bg-gradient-to-br from-black to-black flex items-center justify-center">
-              <span className="text-white/80 font-playfair text-xl">Founder Image Placeholder</span>
-            </div>
+          <div className="relative w-full h-96 rounded-lg overflow-hidden border border-black/10">
+            <Image
+              src="/about-hero.png"
+              alt="BizProLex Team"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
       </Section>
