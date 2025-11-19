@@ -5,7 +5,7 @@ const nextConfig = {
   trailingSlash: true,
   basePath: '',
   assetPrefix: '',
-  distDir: 'out',
+  distDir: 'docs',
   images: {
     unoptimized: true
   }

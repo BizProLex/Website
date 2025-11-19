@@ -1,6 +1,4 @@
 export const CONTACT_INFO = {
-  whatsappNumber: '+9710567449815',
-  whatsappMessage: 'Hello, I would like to inquire about your legal services.',
   email: 'sujata.duge@bizprolex.com',
   website: 'https://bizprolex.com',
   linkedIn: 'https://www.linkedin.com/in/sujataduge/',
@@ -21,6 +19,5 @@ export const ROUTES = {
   SERVICES: '/services/',
   TEAM: '/team/',
   TEAM_MEMBER: '/team/',
-  CONTACT: '/contact/',
   THANKS: '/thanks/'
 };

@@ -24,18 +24,31 @@ jobs:
         run: npm ci
 
       - name: Build static export
-        run: npm run build
-
-      - name: Setup GitHub Pages
         run: |
-          # The build already outputs to docs/ directory via distDir config
-          # Just ensure .nojekyll file exists for GitHub Pages
+          rm -rf docs
+          npm run build
+
+      - name: Fix relative paths for GitHub Pages
+        run: node scripts/fix-paths.js
+
+      - name: Ensure CNAME and .nojekyll in docs
+        run: |
+          # Ensure GitHub Pages doesn't use Jekyll
           touch docs/.nojekyll
+          # If a root CNAME exists, copy it into docs (required when publishing /docs)
+          if [ -f CNAME ]; then
+            cp -f CNAME docs/CNAME
+          fi
+
+      - name: Debug listing (docs)
+        run: |
+          echo "Listing docs directory (top-level):"
+          ls -la docs | sed -n '1,200p'
 
       - name: Commit and push changes
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add docs/
+          git add --all docs/
           git commit -m "Deploy website to GitHub Pages" || echo "No changes to commit"
           git push
