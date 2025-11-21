@@ -20,7 +20,7 @@ export default function Team() {
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-playfair text-xl text-black">Sujata  Duge, LL.M.</h3>
-                <p className="text-black/80 text-sm">Managing Director</p>
+                <p className="text-black/80 text-sm">Managing Partner</p>
 
                 <div className="mt-4 space-y-3 text-black/90 leading-relaxed text-justify text-sm">
                   <p>
